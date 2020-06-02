@@ -47,10 +47,11 @@ INSTALLED_APPS = [
     # Third-party
     'debug_toolbar',
     'django_extensions',
+    'registration',
 
     # Project-specific
     'users',
-    'core'
+    'core',
 ]
 
 MIDDLEWARE = [
@@ -139,3 +140,7 @@ INTERNAL_IPS = [
     '127.0.0.1',
     # ...
 ]
+
+# Django Registration Redux settings
+
+ACCOUNT_ACTIVATION_DAYS = 7
