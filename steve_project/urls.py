@@ -21,7 +21,9 @@ from core import views as core_views
 urlpatterns = [
     path('', core_views.homepage, name = "homepage"),
     path('snippets/', core_views.snippet_list, name ="snippet_list"),
-    # question: will the abnove path work or will it need to be 'core/'?
+    path('snippets/<int:snippet_pk>', core_views.show_snippet, name = 'show_snippet'),
+    # question: will the above path work or will it need to be 'core/'?
+    path('snippets/create_snippet/', core_views.create_snippet, name='create_snippet'),
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
 

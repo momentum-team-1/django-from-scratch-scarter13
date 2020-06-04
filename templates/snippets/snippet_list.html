@@ -1,11 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Your Snippets</h2>
+<h2>Your Code Snippets</h2>
 
+<p>
+    <a href="{% url 'create_snippet' %}">Create New Code Snippet</a>
+</p>
 <ul>
     {% for snippet in snippets %}
-    <li>{{ snippet.title }}</li>
+    <li><a href = "{% url 'show_snippet' snippet_pk = snippet.pk %}">{{ snippet.title }}</a></li>
     {% endfor %}
 </ul>
 {% endblock %}
