@@ -144,3 +144,4 @@ INTERNAL_IPS = [
 # Django Registration Redux settings
 
 ACCOUNT_ACTIVATION_DAYS = 7
+LOGIN_REDIRECT_URL = "/"

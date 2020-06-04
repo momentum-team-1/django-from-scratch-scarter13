@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}
+Recipe Book - {{ snippet.title }}
+{% endblock %}
+
+{% block content %}
+
+<h2>{{ snippet.title }}</h2>
+
+<div>
+    {{ snippet.text }}
+</div>
+
+{% endblock %}
