@@ -9,8 +9,8 @@
 </head>
 <body>
     <div>
-        <div>
-            <h1><a href="{% url 'homepage' %}"></a>Code Cache</h1>
+        <div class="bg-moon-gray">
+            <h1><a href="{% url 'homepage' %}">Code Cache</a></h1>
             {% if user.is_authenticated %}
             <div>
                 Hello, {{ user.username }}!

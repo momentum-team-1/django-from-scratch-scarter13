@@ -19,9 +19,10 @@ from django.urls import include, path
 from core import views as core_views
 
 urlpatterns = [
+    path('', core_views.homepage, name = "homepage"),
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
-    path('',core_views.homepage, name = "homepage"),
+
 ]
 
 if settings.DEBUG:
