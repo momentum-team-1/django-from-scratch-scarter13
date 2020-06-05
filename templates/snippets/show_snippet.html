@@ -1,15 +1,19 @@
 {% extends "base.html" %}
 
 {% block title %}
-Recipe Book - {{ snippet.title }}
+Code Cache - {{ snippet.title }}
 {% endblock %}
 
 {% block content %}
 
 <h2>{{ snippet.title }}</h2>
 
+<p class='i'>{{ snippet.description }}</p>
+
 <div>
-    {{ snippet.text }}
+    <pre>{{ snippet.text }}</pre>
+
+    <a href="{% url 'delete_snippet' pk=snippet.pk %}">Delete Snippet</a>
 </div>
 
 {% endblock %}

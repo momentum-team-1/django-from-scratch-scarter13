@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import SnippetForm
+from .forms import SnippetForm 
 
 # Create your views here. recipe  
 
@@ -35,3 +35,13 @@ def create_snippet(request):
         form = SnippetForm()
 
     return render(request, "snippets/create_snippet.html", {"form": form})
+
+def delete_snippet(request, pk):
+    snippet = get_object_or_404(request.user.snippets, pk=pk)
+    if request.method == 'POST':
+        snippet.delete()
+        return redirect(to='snippet_list')
+
+    return render(request, "snippets/delete_snippet.html",
+                  {"snippet": snippet})
+
