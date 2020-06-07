@@ -8,5 +8,6 @@ class SnippetForm(forms.ModelForm):
             'title',
             'description', 
             'text',
+            'visibility',
         ]
         

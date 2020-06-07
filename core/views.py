@@ -45,3 +45,14 @@ def delete_snippet(request, pk):
     return render(request, "snippets/delete_snippet.html",
                   {"snippet": snippet})
 
+def edit_snippet (request, pk):
+    snippet = get_object_or_404(request.user.snippets, pk=pk)
+    if request.method == 'GET':
+        form = SnippetForm(instance=snippet)
+    else:
+        form = SnippetForm(data=request.POST, instance=snippet)
+        if form.is_valid():
+            form.save()
+            return redirect(to='show_snippet', snippet_pk=snippet.pk)
+
+    return render (request, "snippets/edit_snippet.html", {"form": form, "snippet": snippet})

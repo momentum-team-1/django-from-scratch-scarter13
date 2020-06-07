@@ -24,6 +24,7 @@ urlpatterns = [
     path('snippets/<int:snippet_pk>', core_views.show_snippet, name = 'show_snippet'),
     # question: will the above path work or will it need to be 'core/'?
     path('snippets/create_snippet/', core_views.create_snippet, name='create_snippet'),
+    path('snippets/<int:pk>/edit/', core_views.edit_snippet, name='edit_snippet'),
     path('snippets/<int:pk>/delete/', core_views.delete_snippet, name='delete_snippet'),
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
