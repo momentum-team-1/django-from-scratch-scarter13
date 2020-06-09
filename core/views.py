@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from .models import Tag
 from .forms import SnippetForm 
+
 
 # Create your views here. recipe  
 
@@ -30,6 +32,7 @@ def create_snippet(request):
             snippet = form.save(commit=False)
             snippet.user = request.user
             snippet.save()
+            snippet.set_tag_names(form.cleaned_data['tag_names'])
             return redirect(to='snippet_list')
     else:
         form = SnippetForm()
@@ -47,12 +50,22 @@ def delete_snippet(request, pk):
 
 def edit_snippet (request, pk):
     snippet = get_object_or_404(request.user.snippets, pk=pk)
+
     if request.method == 'GET':
-        form = SnippetForm(instance=snippet)
+        form = SnippetForm(instance=snippet, initial={"tag_names": snippet.get_tag_names()})
     else:
         form = SnippetForm(data=request.POST, instance=snippet)
         if form.is_valid():
-            form.save()
+            snippet = form.save()
+            snippet.set_tag_names(form.cleaned_data['tag_names'])
             return redirect(to='show_snippet', snippet_pk=snippet.pk)
 
     return render (request, "snippets/edit_snippet.html", {"form": form, "snippet": snippet})
+
+def view_tag (request, tag_name):
+    tag = get_object_or_404(Tag, tag=tag_name)
+    #snippets = tag.snippets.filter(snippet.visibility=="PUB")
+    """
+    Note that you will have to pass along 'snippets' in the context along with 'tag' on line 66 when you do decide to activate this; also, some changes you will need in your template
+    """
+    return render (request, "snippets/tag_detail.html", {"tag": tag})
