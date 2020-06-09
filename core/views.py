@@ -64,8 +64,9 @@ def edit_snippet (request, pk):
 
 def view_tag (request, tag_name):
     tag = get_object_or_404(Tag, tag=tag_name)
+    first_person_id = request.user.id
     #snippets = tag.snippets.filter(snippet.visibility=="PUB")
     """
     Note that you will have to pass along 'snippets' in the context along with 'tag' on line 66 when you do decide to activate this; also, some changes you will need in your template
     """
-    return render (request, "snippets/tag_detail.html", {"tag": tag})
+    return render (request, "snippets/tag_detail.html", {"tag": tag, "first_person_id": first_person_id})
