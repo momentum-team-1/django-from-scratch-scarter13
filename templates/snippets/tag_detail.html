@@ -12,6 +12,8 @@
         {% if first_person_id == snippet.user.id %}
         <li><a href = "{% url 'show_snippet' snippet_pk=snippet.pk %}">{{ snippet.title }}</a></li>
         {% endif %}
+    {% empty %}
+    <li>There are no snippets in your bank that match that tag</li>
     {% endfor %}
 </ul>
 
@@ -22,6 +24,8 @@
         {% if first_person_id != snippet.user.id and snippet.visibility == "PUB" %}
         <li><a href = "{% url 'show_public_snippet' snippet_pk=snippet.pk %}">{{ snippet.title }}</a></li>
         {% endif %}
+    {% empty %}
+    <li>There are no public snippets that match that tag</li>
     {% endfor %}
 </ul>
 

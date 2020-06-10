@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Tag
 from .models import Snippet
 from .forms import SnippetForm 
+from django.db.models import Q
 
 
 # Create your views here. recipe  
@@ -66,13 +67,19 @@ def edit_snippet (request, pk):
 def view_tag (request, tag_name):
     tag = get_object_or_404(Tag, tag=tag_name)
     first_person_id = request.user.id
-    #snippets = tag.snippets.filter(snippet.visibility=="PUB")
-    """
-    Note that you will have to pass along 'snippets' in the context along with 'tag' on line 66 when you do decide to activate this; also, some changes you will need in your template
-    """
+
     return render (request, "snippets/tag_detail.html", {"tag": tag, "first_person_id": first_person_id})
 
 def show_public_snippet (request, snippet_pk):
     snippet = get_object_or_404(Snippet, pk=snippet_pk)
 
     return render(request, "snippets/show_public_snippet.html", {"snippet": snippet})
+
+def search_snippets (request):
+    first_person_id = request.user.id
+    query = request.GET.get('q')
+    if query is not None:
+        found_snippets = Snippet.objects.filter(Q(title__icontains=query) | Q (text__icontains=query) | Q(description__icontains=query)).distinct()
+    else:
+        found_snippets = None
+    return render(request, "snippets/search.html", {"first_person_id": first_person_id, "found_snippets": found_snippets, "query": query})

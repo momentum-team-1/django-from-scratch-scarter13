@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Search Snippets</h1>
+
+<form action="{% url 'search_snippets' %}" method="GET">
+    <input type="search" name="q" placeholder="Search all snippets" class="pa2 w-100" value=>
+    <p>
+        <button type="submit">Search</button>
+    </p>
+</form>
+
+{% if found_snippets is not None %}
+
+    <h2>Your Snippets</h2>
+
+    <ul>
+        {% for snippet in found_snippets %}
+            {% if first_person_id == snippet.user.id %}
+            <li><a href = "{% url 'show_snippet' snippet_pk=snippet.pk %}">{{ snippet.title }}</a></li>
+            {% endif %}
+        {% empty %}
+        <li>There are no snippets in your bank that match that query</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Public Snippets</h2>
+
+    <ul>
+        {% for snippet in found_snippets %}
+            {% if first_person_id != snippet.user.id and snippet.visibility == "PUB" %}
+            <li><a href = "{% url 'show_public_snippet' snippet_pk=snippet.pk %}">{{ snippet.title }}</a></li>
+            {% endif %}
+        {% empty %}
+        <li>There are no public snippets that match that query</li>
+        {% endfor %}
+    </ul>
+
+{% endif %}
+
+{% endblock %}
