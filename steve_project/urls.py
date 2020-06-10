@@ -28,6 +28,7 @@ urlpatterns = [
     path('snippets/<int:pk>/delete/', core_views.delete_snippet, name='delete_snippet'),
     path('tags/<str:tag_name>', core_views.view_tag, name='view_tag'),
     path('snippets/search/', core_views.search_snippets, name='search_snippets'),
+    path('snippets/copy/<int:snippet_pk>/', core_views.copy_snippet, name='copy_snippet'),
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
 

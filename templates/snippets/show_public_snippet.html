@@ -20,7 +20,7 @@ Code Cache - {{ snippet.title }}
 <div>
     <pre>{{ snippet.text }}</pre>
 
-    <a href="{% url 'edit_snippet' pk=snippet.pk %}">Edit Snippet</a><br />
+    <a href="{% url 'copy_snippet' snippet_pk=snippet.pk %}">Add Snippet to My Snippets</a>
 
 </div>
 
