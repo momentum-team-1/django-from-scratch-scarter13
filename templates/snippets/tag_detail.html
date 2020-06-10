@@ -20,7 +20,7 @@
 <ul>
     {% for snippet in tag.snippets.all %}
         {% if first_person_id != snippet.user.id and snippet.visibility == "PUB" %}
-        <li><a href = "{% url 'show_snippet' snippet_pk=snippet.pk %}">{{ snippet.title }}</a></li>
+        <li><a href = "{% url 'show_public_snippet' snippet_pk=snippet.pk %}">{{ snippet.title }}</a></li>
         {% endif %}
     {% endfor %}
 </ul>

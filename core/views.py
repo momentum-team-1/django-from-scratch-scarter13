@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Tag
+from .models import Snippet
 from .forms import SnippetForm 
 
 
@@ -70,3 +71,8 @@ def view_tag (request, tag_name):
     Note that you will have to pass along 'snippets' in the context along with 'tag' on line 66 when you do decide to activate this; also, some changes you will need in your template
     """
     return render (request, "snippets/tag_detail.html", {"tag": tag, "first_person_id": first_person_id})
+
+def show_public_snippet (request, snippet_pk):
+    snippet = get_object_or_404(Snippet, pk=snippet_pk)
+
+    return render(request, "snippets/show_public_snippet.html", {"snippet": snippet})

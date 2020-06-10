@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}
+Code Cache - {{ snippet.title }}
+{% endblock %}
+
+{% block content %}
+
+<h2>{{ snippet.title }}</h2>
+
+<ul class="list p10">
+    {% for tag in snippet.tags.all %}
+    <li class="dib mr2 pa2 bg-silver"><a href="{% url 'view_tag' tag_name=tag.tag %}"> {{ tag }}</a></li>
+    {% endfor %}
+</ul>
+
+
+<p class='i'>{{ snippet.description }}</p>
+
+<div>
+    <pre>{{ snippet.text }}</pre>
+
+    <a href="{% url 'edit_snippet' pk=snippet.pk %}">Edit Snippet</a><br />
+
+</div>
+
+{% endblock %}

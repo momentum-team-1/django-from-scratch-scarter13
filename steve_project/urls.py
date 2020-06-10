@@ -22,7 +22,7 @@ urlpatterns = [
     path('', core_views.homepage, name = "homepage"),
     path('snippets/', core_views.snippet_list, name ="snippet_list"),
     path('snippets/<int:snippet_pk>', core_views.show_snippet, name = 'show_snippet'),
-    # question: will the above path work or will it need to be 'core/'?
+    path('snippets/<int:snippet_pk>/', core_views.show_public_snippet, name = 'show_public_snippet'),
     path('snippets/create_snippet/', core_views.create_snippet, name='create_snippet'),
     path('snippets/<int:pk>/edit/', core_views.edit_snippet, name='edit_snippet'),
     path('snippets/<int:pk>/delete/', core_views.delete_snippet, name='delete_snippet'),
