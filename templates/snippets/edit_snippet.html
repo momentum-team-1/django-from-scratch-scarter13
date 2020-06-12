@@ -2,14 +2,14 @@
 
 {% block content %}
 
-<h2>Edit Code Snippet</h2>
+<h2 class="ml6 dark-blue">Edit Code Snippet</h2>
 
-<div>
+<div class="ml6 dark-blue">
     <form action="{% url 'edit_snippet' pk=snippet.pk %}" method="POST">
         {% csrf_token %}
         {{ form.as_p }}
         <div>
-            <button type="submit">Update your Snippet</button>
+            <button class="f5 link dim ba b--dark-blue bw2 ph3 pv2 mb2 dib dark-blue shadow-2" type="submit">Update your Snippet</button>
         </div>
 
     </form>

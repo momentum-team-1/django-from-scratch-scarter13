@@ -1,27 +1,32 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Your Code Snippets</h2>
+<h2 class="tc dark-blue">Your Code Snippets</h2>
 
-<h3>Public Snippets:</h3>
-<ul>
-    {% for snippet in snippets %}
-        {% if snippet.visibility == "PUB" %}
-            <li><a href = "{% url 'show_snippet' snippet_pk=snippet.pk %}">{{ snippet.title }}</a></li>
-        {% endif %}
-    {% endfor %}
-</ul>
-<h3>Private Snippets:</h3>
-<ul>
-    {% for snippet in snippets %}
-        {% if snippet.visibility == "PRI" %}
-            <li><a href = "{% url 'show_snippet' snippet_pk=snippet.pk %}">{{ snippet.title }}</a></li>
-        {% endif %}
-    {% endfor %}
-</ul>
-
-<p>
-    <a href="{% url 'create_snippet' %}">Create New Code Snippet</a>
+<div class="flex justify-around ">
+    <div class="w-50-m ml6 mr3 bg-light-gray pa1 outline shadow-2">
+        <h3 class="tc dark-blue">Public Snippets:</h3>
+        <ul>
+            {% for snippet in snippets %}
+                {% if snippet.visibility == "PUB" %}
+                    <li class="mr4"><a href = "{% url 'show_snippet' snippet_pk=snippet.pk %}">{{ snippet.title }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="w-50-m mr6 ml3 bg-light-gray pa1 outline shadow-2">
+        <h3 class="tc dark-blue">Private Snippets:</h3>
+        <ul>
+            {% for snippet in snippets %}
+                {% if snippet.visibility == "PRI" %}
+                    <li class= "mr4"><a href = "{% url 'show_snippet' snippet_pk=snippet.pk %}">{{ snippet.title }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>    
+</div>
+<p class="tc dark-blue">
+    <a class="f5 link dim ba bw2 ph3 pv2 mb2 dib bg-light-gray dark-blue shadow-2" href="{% url 'create_snippet' %}">Create New Code Snippet</a>
 </p>
 
 {% endblock %}

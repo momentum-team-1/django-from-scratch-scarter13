@@ -2,22 +2,23 @@
 
 {% block content %}
 
-<h2>Delete Code Snippet</h2>
+<h2 class="ml6 dark-blue">Delete Code Snippet</h2>
 
-<p class='i'>{{ snippet.description }}</p>
+<p class='i ml6'>{{ snippet.description }}</p>
+
+<div class="ml6 mr6 bg-black outline shadow-2 nowrap overflow-x-auto">
+    <pre class="f6 dib green">{{ snippet.text }}</pre>
+
+</div>
 
 <div>
-    <pre>{{ snippet.text }}</pre>
-
+    <form action ="{% url 'delete_snippet' pk=snippet.pk %}" method="POST">
+        {% csrf_token %}
+        <h3 class="ml6 dark-blue">Are you sure you want to delete {{ snippet.title }}?</p>
     <div>
-        <form action ="{% url 'delete_snippet' pk=snippet.pk %}" method="POST">
-            {% csrf_token %}
-            <p>Are you sure you want to delete {{ snippet.name }}?</p>
-        <div>
-            <button type="submit">Delete</button><br />
-            <a href="{% url 'show_snippet' snippet_pk=snippet.pk %}">Cancel</a>
-        </div>
-        </form>
+            <button class="f4 link dim ba b--red bw2 ph3 pv2 mb2 dib red shadow-2" href="{% url 'edit_snippet' pk=snippet.pk %}" type="submit">Delete</button><br />
+            <a class= "f5 link dim ba bw2 ph3 pv2 mb2 dib bg-light-gray dark-blue shadow-2" href="{% url 'show_snippet' snippet_pk=snippet.pk %}"href="{% url 'show_snippet' snippet_pk=snippet.pk %}">Cancel</a>
     </div>
+    </form>
 </div>
 {% endblock %}

@@ -2,9 +2,9 @@
 
 {% block content %}
 
-<h1>Search Snippets</h1>
+<h1 class="dark-blue ml6">Search Snippets</h1>
 
-<form action="{% url 'search_snippets' %}" method="GET">
+<form class="ml6 mr6" action="{% url 'search_snippets' %}" method="GET">
     <input type="search" name="q" placeholder="Search all snippets" class="pa2 w-100" value=>
     <p>
         <button type="submit">Search</button>
@@ -12,31 +12,32 @@
 </form>
 
 {% if found_snippets is not None %}
-
-    <h2>Your Snippets</h2>
-
-    <ul>
-        {% for snippet in found_snippets %}
-            {% if first_person_id == snippet.user.id %}
-            <li><a href = "{% url 'show_snippet' snippet_pk=snippet.pk %}">{{ snippet.title }}</a></li>
-            {% endif %}
-        {% empty %}
-        <li>There are no snippets in your bank that match that query</li>
-        {% endfor %}
-    </ul>
-
-    <h2>Public Snippets</h2>
-
-    <ul>
-        {% for snippet in found_snippets %}
-            {% if first_person_id != snippet.user.id and snippet.visibility == "PUB" %}
-            <li><a href = "{% url 'show_public_snippet' snippet_pk=snippet.pk %}">{{ snippet.title }}</a></li>
-            {% endif %}
-        {% empty %}
-        <li>There are no public snippets that match that query</li>
-        {% endfor %}
-    </ul>
-
+    <div class="flex justify-around ">
+        <div class="w-50-m ml6 mr3 bg-light-gray pa1 outline shadow-2">
+            <h3 class="tc dark-blue">Your Snippets</h3>
+                <ul>
+                    {% for snippet in found_snippets %}
+                        {% if first_person_id == snippet.user.id %}
+                        <li class="mr4"><a href = "{% url 'show_snippet' snippet_pk=snippet.pk %}">{{ snippet.title }}</a></li>
+                        {% endif %}
+                    {% empty %}
+                        <li class="mr4">There are no snippets in your bank that match that query</li>
+                    {% endfor %}
+                </ul>
+        </div>
+        <div class="w-50-m mr6 ml3 bg-light-gray pa1 outline shadow-2">
+            <h3 class="tc dark-blue">Public Snippets</h3>
+                <ul>
+                    {% for snippet in found_snippets %}
+                        {% if first_person_id != snippet.user.id and snippet.visibility == "PUB" %}
+                        <li class="mr4"><a href = "{% url 'show_public_snippet' snippet_pk=snippet.pk %}">{{ snippet.title }}</a></li>
+                        {% endif %}
+                    {% empty %}
+                    <li class="mr4">There are no public snippets that match that query</li>
+                    {% endfor %}
+                </ul>
+        </div>        
+    </div>
 {% endif %}
 
 {% endblock %}

@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from users.models import User
 from .models import Tag
 from .models import Snippet
 from .forms import SnippetForm 

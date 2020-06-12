@@ -2,31 +2,31 @@
 
 {% block content%}
 
-<h1>Tag: {{ tag }}</h1>
+<h1 class="ml6 f3 grow no-underline br-pill ba ph3 pv2 mb2 dib dark-blue bg-light-gray shadow-2">Tag: {{ tag }}</h1>
 
-
-<h2>Your Snippets</h2>
-
-<ul>
-    {% for snippet in tag.snippets.all %}
-        {% if first_person_id == snippet.user.id %}
-        <li><a href = "{% url 'show_snippet' snippet_pk=snippet.pk %}">{{ snippet.title }}</a></li>
-        {% endif %}
-    {% empty %}
-    <li>There are no snippets in your bank that match that tag</li>
-    {% endfor %}
-</ul>
-
-<h2>Public Snippets</h2>
-
-<ul>
-    {% for snippet in tag.snippets.all %}
-        {% if first_person_id != snippet.user.id and snippet.visibility == "PUB" %}
-        <li><a href = "{% url 'show_public_snippet' snippet_pk=snippet.pk %}">{{ snippet.title }}</a></li>
-        {% endif %}
-    {% empty %}
-    <li>There are no public snippets that match that tag</li>
-    {% endfor %}
-</ul>
-
+<div class="flex justify-around ">
+    <div class="w-50-m ml6 mr3 bg-light-gray pa1 outline shadow-2">
+        <h3 class="tc dark-blue">Your Snippets</h2>
+            <ul>
+                {% for snippet in tag.snippets.all %}
+                    {% if first_person_id == snippet.user.id %}
+                    <li class="mr4"><a href = "{% url 'show_snippet' snippet_pk=snippet.pk %}">{{ snippet.title }}</a></li>
+                    {% endif %}
+                {% empty %}
+                <li class="mr4">There are no snippets in your bank that match that tag</li>
+                {% endfor %}
+            </ul>
+    </div>
+    <div class="w-50-m mr6 ml3 bg-light-gray pa1 outline shadow-2">
+        <h3 class="tc dark-blue">Public Snippets</h3>
+        <ul>
+            {% for snippet in tag.snippets.all %}
+                {% if first_person_id != snippet.user.id and snippet.visibility == "PUB" %}
+                <li class="mr4"><a href = "{% url 'show_public_snippet' snippet_pk=snippet.pk %}">{{ snippet.title }}</a></li>
+                {% endif %}
+            {% empty %}
+            <li>There are no public snippets that match that tag</li>
+            {% endfor %}
+        </ul>
+</div>
 {% endblock %}
