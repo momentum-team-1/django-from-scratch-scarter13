@@ -3,7 +3,7 @@ from users.models import User
 
 # Create your models here.
 class Tag(models.Model):
-    tag = models.CharField(max_length=100, unique=True)
+    tag = models.CharField(max_length=100, unique=True, null=True, blank=True)
 
     def __str__(self):
         return self.tag
