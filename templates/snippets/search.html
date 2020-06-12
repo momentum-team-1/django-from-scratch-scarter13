@@ -5,7 +5,7 @@
 <h1 class="dark-blue ml6">Search Snippets</h1>
 
 <form class="ml6 mr6" action="{% url 'search_snippets' %}" method="GET">
-    <input type="search" name="q" placeholder="Search all snippets" class="pa2 w-100" value=>
+    <input type="search" name="q" placeholder="Search all snippets" class="pa2 w-100" value="{{ request.GET.q }}">
     <p>
         <button type="submit">Search</button>
     </p>
